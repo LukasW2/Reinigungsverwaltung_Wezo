@@ -1,0 +1,119 @@
+@startuml
+
+abstract class CleaningTask <<aggregate>> {
+  +taskId: string
+  +description: string
+  +status: string
+  +points: int
+  +Products: List<Products>
+  +CleaningTask: List<CleaningTask>
+  +Zeitstempel: Zeitstempel
+  --
+  +CleaningTask(string taskId, string description, string status, int points, Products products)
+  +AddCleaningTask(CleaningTask task)
+  +RemoveCleaningTask(CleaningTask task)
+  +RemoveProduct(Products p) 
+  +ProductQuantity() : int
+}
+
+class DailyCleaningTask extends CleaningTask {
+  +tryHandIn(employee: Employee)
+  +reviewHandIn() : boolean
+}
+
+class WeeklyCleaningTask extends CleaningTask {
+  +Week: int
+  +Year: int
+  --
+  +tryHandIn(employee: Employee)
+  +reviewHandIn() : boolean
+}
+
+class Employee {
+  +EmployeeId: int
+  +Name: string
+  +Position: string
+  +ActiveTasks: List<CleaningTask>
+  +Employee: List<Employee>
+  --
+  +Employee(int employeeid, string name, string position)
+  +getActiveTasks() : List<CleaningTask>
+  +AddEmployee(employee: Employee)
+  +RemoveEmployee(employee: Employee)
+  +EmployeeQuantity() : int 
+}
+
+class Zeitstempel <<value object>>{
+    +date: DateTime
+    +description: string?
+    +duration: int
+}
+
+
+class Product {
+  + Id: int
+  + Name: string
+  + Description: string
+  + ExpirationDate: DateTime
+  --
+  + Product(string name, Description description, date ExpireDate)
+  + CountProduct(Product p)
+}
+
+class Room {
+  +RoomNumber: int
+  +Beds: int
+  +IsSmoking: boolean
+  +CleaningTask: List<CleaningTask>
+  --
+  +Room(int roomnumber, int beds, bool smoking, int points)
+  +Points: int
+  +addCleaningTask(task: CleaningTask)
+}
+
+class Hotel <<aggregate>> {
+  +Id: int
+  +Guid: Guid
+  +Name: string
+  +Address: string
+  +Rooms: List<Room>
+  --
+  +AddRoom(Room r)
+  +RemoveRoom(Room r)
+  +RoomQuantity() : int
+  +calculateAveragePoints() : int
+}
+
+class Guest {
+  +GuestId: int
+  +Name: string
+  +Address: string
+  +Reservation: Reservation
+}
+
+class Reservation {
+  +reservationId: int
+  +room: Room
+  +checkInDate: DateTime
+  +checkOutDate: DateTime
+  +guest: Guest
+  +Reservation: List<Reservation>
+  --
+  +Reservation(int reservationId, Room room, DateTime checkInDate, DateTime checkOutDate, Guest guest)
+  +addReservation(Reservation reservation)
+  +removeReservation(Reservation reservation)
+}
+
+DailyCleaningTask *--> Zeitstempel
+WeeklyCleaningTask *--> Zeitstempel
+CleaningTask <|-- DailyCleaningTask
+CleaningTask <|-- WeeklyCleaningTask
+Employee *--> CleaningTask
+Room --> DailyCleaningTask
+Room --> WeeklyCleaningTask
+Room *--> Hotel
+Reservation *--> Guest
+Reservation --> Room
+Product *--> CleaningTask
+
+@enduml
