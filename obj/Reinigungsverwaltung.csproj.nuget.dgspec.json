@@ -72,6 +72,14 @@
               "target": "Package",
               "version": "[17.4.1, )"
             },
+            "Model": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.2, )"
+            },
             "xunit.extensibility.core": {
               "target": "Package",
               "version": "[2.4.2, )"

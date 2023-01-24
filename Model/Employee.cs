@@ -24,6 +24,7 @@ public class Employee
     public int EmployeeId { get; }
     public string Name { get; }
     public string Position { get; }
+    public DateTime Birthday { get; set; }
     public virtual List<CleaningTask> ActiveTasks => _activeTasks;
 
 
