@@ -1,6 +1,6 @@
 @startuml
 
-abstract class CleaningTask <<aggregate>> {
+class CleaningTask <<aggregate>> {
   +taskId: string
   +description: string
   +status: string

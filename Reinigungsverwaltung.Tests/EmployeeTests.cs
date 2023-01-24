@@ -12,9 +12,10 @@ public class EmployeeTests : DatabaseTest
         _db.Database.EnsureCreated();
         var employee = new Employee(1, "Max Müller", "Manager");
             _db.Employee.Add(employee);
-        var cleaning = new DailyCleaningTask(employee, 100, 20,
-            new Description("Current CPU-temperature", "Current CPU-temperature in Celsius"));
-        employee.AddEmployee(employee);
+            var cleaning = new CleaningTask( 1, "Boden muss gereinigt werden", "Bearbeitung", 4 ,
+                new Products(1, "Bodenreiniger" , "Entfernt Flecken auf dem Boden",new DateTime(2023-02-10) ));
+            
+        
         _db.SaveChanges();
     }
     

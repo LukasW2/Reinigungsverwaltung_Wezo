@@ -9,18 +9,18 @@ public class Reservation
     public Guest guest { get; set; }
     public Room room { get; set; }
 
-    public Reservation(int reservationId, Room room, DateTime checkInDate, DateTime checkOutDate, Guest guest)
+    public Reservation(int reservationId, Room room, DateTime checkInDate, DateTime checkOutDate)
     {
         this.reservationId = reservationId;
         this.room = room;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
-        this.guest = guest;
+       
     }
 
     public void AddReservation(Reservation reservation)
     {
-        var newReserv = new Reservation(reservationId, room, checkInDate, checkOutDate, guest);
+        var newReserv = new Reservation(reservationId, room, checkInDate, checkOutDate);
         _reserv.Add(newReserv);
     }
 

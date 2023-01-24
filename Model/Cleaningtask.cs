@@ -1,12 +1,12 @@
 ﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
 
-public abstract class CleaningTask
+public class CleaningTask
 {
     protected List<CleaningTask> _cleaningTasks = new();
     public List<Products> _products = new List<Products>();
     public Zeitstempel zeitstempel { get; set; }
 
-    protected CleaningTask(string taskId, string description, string status, int points, Products products)
+    public CleaningTask(int taskId, string description, string status, int points, Products products)
     {
         this.taskId = taskId;
         this.description = description;
@@ -15,7 +15,7 @@ public abstract class CleaningTask
         _products.Add(products);
     }
 
-    public string taskId { get; set; }
+    public int taskId { get; set; }
     public string description { get; set; }
     public string status { get; set; }
     public int points { get; set; }

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model.Reinigungsverwaltung.Infrastructure;
 
-public class ReinigungsverwaltungContext : DbContext
+public class ReinigungsverwaltungContext: DbContext
 {
     public ReinigungsverwaltungContext(DbContextOptions opt) : base(opt) { }
     
