@@ -4,25 +4,24 @@ public class Employee
 {
     protected List<CleaningTask> _activeTasks = new();
 
-    protected List<Employee> _employees = new();
-
-    public Employee(int employeeid, string name, string position)
+    public Employee(string firstname, string lastname, string position)
     {
-        EmployeeId = employeeid;
-        Name = name;
+        Firstname = firstname;
+        Lastname = lastname;
         Position = position;
-        _activeTasks = new List<CleaningTask>();
+        
     }
 
 
 #pragma warning disable CS8618
-    protected Employee(string position)
+    protected Employee()
     {
-        Position = position;
+        
     }
 #pragma warning restore CS8618
-    public int EmployeeId { get; }
-    public string Name { get; }
+    public int EmployeeId { get; private set; }
+    public string Firstname { get; set; }
+    public string Lastname { get; set; }
     public string Position { get; }
     public DateTime Birthday { get; set; }
     public virtual List<CleaningTask> ActiveTasks => _activeTasks;
@@ -33,19 +32,10 @@ public class Employee
         return _activeTasks;
     }
 
-    public void AddEmployee(int employeeId, string name, string position)
+    public int CleaningTasksQuantity()
     {
-        var newEmployee = new Employee(employeeId, name, position);
-        _employees.Add(newEmployee);
+        return _activeTasks.Count;
     }
-
-    public void RemoveEmployee(Employee emp)
-    {
-        _employees.Remove(emp);
-    }
-
-    public int EmployeeQuantity()
-    {
-        return _employees.Count;
-    }
+    
+    
 }

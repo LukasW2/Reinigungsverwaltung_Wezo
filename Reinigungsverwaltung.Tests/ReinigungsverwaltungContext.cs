@@ -1,7 +1,6 @@
-﻿using Xunit;
-using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
 
-namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model.Reinigungsverwaltung.Tests;
+namespace Reinigungsverwaltung.Reinigungsverwaltung.Tests;
 
 public class ReinigungsverwaltungContextTests : DatabaseTest
 {
@@ -17,19 +16,17 @@ public class ReinigungsverwaltungContextTests : DatabaseTest
         _db.Database.EnsureCreated();
 
 
-        var Employee1 = new Employee(1, "Max Müller", "Manager");
-        var Employee2 = new Employee(2, "Todl Maier", "Director");
-        var Employee3 = new Employee(3, "Gunther Fischer", "Team Leader");
+        var Employee1 = new Employee("Max", "Müller", "Manager");
+        var Employee2 = new Employee("Todl", "Maier", "Director");
+        var Employee3 = new Employee("Gunther", "Fischer", "Team Leader");
         
         _db.Employee.Add(Employee1);
         _db.Employee.Add(Employee2);
         _db.Employee.Add(Employee3);
 
         
-        var Guest1 = new Guest(1, "Andrew Paler", "Berggasse 12", new DateTime(1989 - 03 - 12),
-            new Reservation(1, new Room(12, 2, true, 8), DateTime.Today, new DateTime(2023 - 02 - 01)));
-        var Guest2 = new Guest(2, "Tom Duwal", "Parkstrasse 6", new DateTime(1997-11-01),
-            new Reservation(2, new Room(8, 4, false, 9), DateTime.Today, new DateTime(2023-02-16)));
+        var Guest1 = new Guest("Andrew", "Paler", "Berggasse 12",new DateTime(1989 - 03 - 12));
+        var Guest2 = new Guest("Tom", "Duwal","Parkstrasse 6", new DateTime(1997-11-01));
 
         _db.Guest.Add(Guest1);
         _db.Guest.Add(Guest2);
@@ -43,20 +40,29 @@ public class ReinigungsverwaltungContextTests : DatabaseTest
         _db.Hotel.Add(Hotel2);
         _db.Hotel.Add(Hotel3);
 
+        var Reserv1 = new Reservation(DateTime.Today, new DateTime(2023 - 02 - 01));
+        var Reserv2 = new Reservation(DateTime.Today, new DateTime(2023 - 02 - 16));
 
-        var Products1 = new Products(1, "Bodenreiniger", "Entfernt Flecken", new DateTime(2023 - 09 - 10));
-        var Products2 = new Products(2, "Fensterreiniger", "Macht das Fenster sauber", new DateTime(2023 - 11 - 31));
-        var Products3 = new Products(3, "Luftreiniger", "Erfrischt die Luft", new DateTime(2023 - 04 - 23));
+        _db.Reservation.Add(Reserv1);
+        _db.Reservation.Add(Reserv2);
+
+        var Products1 = new Products("Bodenreiniger", "Entfernt Flecken", new DateTime(2023 - 09 - 10));
+        var Products2 = new Products("Fensterreiniger", "Macht das Fenster sauber", new DateTime(2023 - 11 - 31));
+        var Products3 = new Products("Luftreiniger", "Erfrischt die Luft", new DateTime(2023 - 04 - 23));
 
         _db.Products.Add(Products1);
         _db.Products.Add(Products2);
         _db.Products.Add(Products3);
 
+        var Room1 = new Room(12, 2, true, 8);
+        var Room2 = new Room(8, 4, false, 9);
+        
+        _db.Room.Add(Room1);
+        _db.Room.Add(Room2);
 
-        var Cleaningtask1 = new CleaningTask(1, "Bette reinigen", "Bearbeitung", 7,
-                            new Products(4, "Allzweckreiniger", "Entfernt Fett und Schmutz", new DateTime(2023 - 11 - 29)));
-        var Cleaningtask2 = new CleaningTask(2, "Boden waschen", "Bearbeitung", 5,
-            new Products(4, "Allzweckreiniger Bodenreiniger", "Ist für den Boden geignet", new DateTime(2024 - 04 - 17)));
+        var Cleaningtask1 = new CleaningTask("Bette reinigen", "Bearbeitung", 7);
+        var Cleaningtask2 = new CleaningTask("Boden waschen", "Bearbeitung", 5
+            );
         
         _db.CleaningTask.Add(Cleaningtask1);
         _db.CleaningTask.Add(Cleaningtask2);
@@ -70,7 +76,9 @@ public class ReinigungsverwaltungContextTests : DatabaseTest
         Assert.True(_db.Employee.ToList().Count > 0);
         Assert.True(_db.Guest.ToList().Count > 0);
         Assert.True(_db.Hotel.ToList().Count > 0);
+        Assert.True(_db.Reservation.ToList().Count > 0);
         Assert.True(_db.Products.ToList().Count > 0);
+        Assert.True(_db.Room.ToList().Count > 0);
         Assert.True(_db.CleaningTask.ToList().Count > 0);
         
     }

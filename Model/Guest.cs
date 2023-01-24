@@ -2,19 +2,21 @@
 
 public class Guest
 {
-    public Guest(int guestId, string name, string address, DateTime birthday, Reservation reservation)
+    public Guest(string firstname, string lastname, string address, DateTime birthday)
     {
-        GuestId = guestId;
-        Name = name;
+        Firstname = firstname;
+        Lastname = lastname;
         Address = address;
-        Reservation = reservation;
         Birthday = birthday;
     }
 
     public int GuestId { get; set; }
-    public string Name { get; set; }
+    
+    public string Firstname { get; set; }
+    public string Lastname { get; set; }
+    
     public string Address { get; set; }
-    public Reservation Reservation { get; set; }
+    public virtual Reservation Reservation { get; set; }
     
     public DateTime Birthday { get; set; }
 

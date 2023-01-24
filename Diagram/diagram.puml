@@ -1,7 +1,7 @@
 @startuml
 
 class CleaningTask <<aggregate>> {
-  +taskId: string
+  +taskId: int
   +description: string
   +status: string
   +points: int
@@ -9,19 +9,23 @@ class CleaningTask <<aggregate>> {
   +CleaningTask: List<CleaningTask>
   +Zeitstempel: Zeitstempel
   --
-  +CleaningTask(string taskId, string description, string status, int points, Products products)
-  +AddCleaningTask(CleaningTask task)
-  +RemoveCleaningTask(CleaningTask task)
+  +CleaningTask(string description, string status, int points, Products products)
   +RemoveProduct(Products p) 
   +ProductQuantity() : int
+  +AddEmployee(employee: Employee)
+  +RemoveEmployee(employee: Employee)
+  +EmployeeQuantity() : int 
 }
 
 class DailyCleaningTask extends CleaningTask {
+  +Priority: int
+  --
   +tryHandIn(employee: Employee)
   +reviewHandIn() : boolean
 }
 
 class WeeklyCleaningTask extends CleaningTask {
+  +PreferredDaY: string
   +Week: int
   +Year: int
   --
@@ -31,16 +35,15 @@ class WeeklyCleaningTask extends CleaningTask {
 
 class Employee {
   +EmployeeId: int
-  +Name: string
+  +Firstname: string
+  +Lastname: string
   +Position: string
   +ActiveTasks: List<CleaningTask>
   +Employee: List<Employee>
   --
-  +Employee(int employeeid, string name, string position)
+  +Employee(string firstname, string lastname, string position)
   +getActiveTasks() : List<CleaningTask>
-  +AddEmployee(employee: Employee)
-  +RemoveEmployee(employee: Employee)
-  +EmployeeQuantity() : int 
+  +CleaningTasksQuantity(): int
 }
 
 class Zeitstempel <<value object>>{
@@ -50,14 +53,13 @@ class Zeitstempel <<value object>>{
 }
 
 
-class Product {
+class Products {
   + Id: int
   + Name: string
   + Description: string
   + ExpirationDate: DateTime
   --
-  + Product(string name, Description description, date ExpireDate)
-  + CountProduct(Product p)
+  + Products(string name, Description description, date ExpireDate)
 }
 
 class Room {
@@ -66,9 +68,10 @@ class Room {
   +IsSmoking: boolean
   +CleaningTask: List<CleaningTask>
   --
-  +Room(int roomnumber, int beds, bool smoking, int points)
+  +Room(int beds, bool smoking, int points)
   +Points: int
-  +addCleaningTask(task: CleaningTask)
+  +AddCleaningTask(task: CleaningTask)
+  +RemoveCleaningTask(CleaningTask task)
 }
 
 class Hotel <<aggregate>> {
@@ -77,18 +80,25 @@ class Hotel <<aggregate>> {
   +Name: string
   +Address: string
   +Rooms: List<Room>
+  +Reservation: List<Reservation>
   --
+  +Hotel(string n, string a)
   +AddRoom(Room r)
   +RemoveRoom(Room r)
   +RoomQuantity() : int
   +calculateAveragePoints() : int
+  +AddReservation(Room room, DateTime checkInDate, DateTime checkOutDate)
+  +removeReservation(Reservation reservation)
 }
 
 class Guest {
   +GuestId: int
-  +Name: string
+  +Firstname: string
+  +Lastname: string
   +Address: string
   +Reservation: Reservation
+  --
+  +Guest(string firstname, string lastname, string address, DateTime birthday, Reservation reservation)
 }
 
 class Reservation {
@@ -99,21 +109,18 @@ class Reservation {
   +guest: Guest
   +Reservation: List<Reservation>
   --
-  +Reservation(int reservationId, Room room, DateTime checkInDate, DateTime checkOutDate, Guest guest)
-  +addReservation(Reservation reservation)
-  +removeReservation(Reservation reservation)
+  +Reservation(Room room, DateTime checkInDate, DateTime checkOutDate, Guest guest)
 }
 
 DailyCleaningTask *--> Zeitstempel
 WeeklyCleaningTask *--> Zeitstempel
-CleaningTask <|-- DailyCleaningTask
-CleaningTask <|-- WeeklyCleaningTask
+
 Employee *--> CleaningTask
 Room --> DailyCleaningTask
 Room --> WeeklyCleaningTask
 Room *--> Hotel
 Reservation *--> Guest
 Reservation --> Room
-Product *--> CleaningTask
+Products *--> CleaningTask
 
 @enduml

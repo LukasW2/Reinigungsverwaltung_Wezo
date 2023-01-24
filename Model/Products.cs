@@ -7,9 +7,8 @@ public class Products
     public string Description { get; set; }
     public DateTime ExpirationDate { get; set; }
 
-    public Products(int id, string name, string description, DateTime expirationDate)
+    public Products(string name, string description, DateTime expirationDate)
     {
-        Id = id;
         Name = name;
         Description = description;
         ExpirationDate = expirationDate;

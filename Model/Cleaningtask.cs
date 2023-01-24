@@ -2,40 +2,22 @@
 
 public class CleaningTask
 {
-    protected List<CleaningTask> _cleaningTasks = new();
+    protected static List<Employee> _employees = new();
     public List<Products> _products = new List<Products>();
-    public Zeitstempel zeitstempel { get; set; }
+    public Zeitstempel Zeitstempel { get; set; }
 
-    public CleaningTask(int taskId, string description, string status, int points, Products products)
+    public CleaningTask(string description, string status, int points)
     {
-        this.taskId = taskId;
         this.description = description;
         this.status = status;
         this.points = points;
-        _products.Add(products);
     }
 
-    public int taskId { get; set; }
+    public int taskId { get; private set; }
     public string description { get; set; }
     public string status { get; set; }
     public int points { get; set; }
-    public virtual List<CleaningTask> CleaningTasks => _cleaningTasks;
 
-    public void AddCleaningTask(CleaningTask task)
-    {
-        _cleaningTasks.Add(task);
-    }
-
-    public void RemoveCleaningTask(CleaningTask task)
-    {
-        _cleaningTasks.Remove(task);
-    }
-
-    public int CleaningTasksQuantity()
-    {
-        return _cleaningTasks.Count;
-    }
-    
     public void RemoveProduct(Products p) 
     {
         _products.Remove(p);
@@ -43,6 +25,22 @@ public class CleaningTask
     public int ProductQuantity()
     {
         return _products.Count;
+    }
+    
+    public void AddEmployee(string firstname, string lastname, string position)
+    {
+        var newEmployee = new Employee(firstname, lastname, position);
+        _employees.Add(newEmployee);
+    }
+
+    public void RemoveEmployee(Employee emp)
+    {
+        _employees.Remove(emp);
+    }
+
+    public int EmployeeQuantity()
+    {
+        return _employees.Count;
     }
     
 }

@@ -5,14 +5,14 @@ public class Room
     private int _points { get; set; }
     public int Beds { get; set; }
     public List<CleaningTask> cleaningTasks;
-    public bool IsSmoking { get; set; }
-    public int RoomNumber{ get; set; }
+    public bool Issmoking { get; set; }
+    public int Roomnumber{ get; set; }
 
-    public Room(int roomnumber, int beds, bool smoking, int points)
+    public Room(int roomnumber, int beds, bool issmoking, int points)
     {
-        RoomNumber = roomnumber;
+        Roomnumber = roomnumber;
         Beds = beds;
-        IsSmoking = smoking;
+        Issmoking = issmoking;
         Points = points;
     }
 
@@ -24,9 +24,15 @@ public class Room
             if (value >= 0 && value <= 10) _points = value;
         }
     }
+    
 
     public void AddCleaningTask(CleaningTask task)
     {
         cleaningTasks.Add(task);
     }
+    public void RemoveCleaningTask(CleaningTask task)
+    {
+        cleaningTasks.Remove(task);
+    }
+    
 }

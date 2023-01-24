@@ -1,6 +1,6 @@
-﻿using Xunit;
+﻿using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
 
-namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model.Reinigungsverwaltung.Tests;
+namespace Reinigungsverwaltung.Reinigungsverwaltung.Tests;
 
 [Collection("Sequential")]
 public class EmployeeTests : DatabaseTest
@@ -10,10 +10,9 @@ public class EmployeeTests : DatabaseTest
     public EmployeeTests()
     {
         _db.Database.EnsureCreated();
-        var employee = new Employee(1, "Max Müller", "Manager");
+        var employee = new Employee("Max", "Müller", "Manager");
             _db.Employee.Add(employee);
-            var cleaning = new CleaningTask( 1, "Boden muss gereinigt werden", "Bearbeitung", 4 ,
-                new Products(1, "Bodenreiniger" , "Entfernt Flecken auf dem Boden",new DateTime(2023-02-10) ));
+            var cleaning = new CleaningTask("Boden muss gereinigt werden", "Bearbeitung", 4 );
             
         
         _db.SaveChanges();
@@ -30,9 +29,10 @@ public class EmployeeTests : DatabaseTest
     [Fact]
     public void RemoveEmployeeSuccessTt()
     {
-        var employee = _db.Employee.First();
         var cleaningtask = _db.CleaningTask.First();
-        employee.RemoveEmployee(employee);
+        var employee = _db.Employee.First();
+       
+        cleaningtask.RemoveEmployee(employee);
         _db.SaveChanges();
 
         _db.ChangeTracker.Clear();
@@ -45,7 +45,7 @@ public class EmployeeTests : DatabaseTest
     [Fact]
     public void EmployeeQuantitySuccessTt()
     {
-        Assert.True(_db.Employee.First().EmployeeQuantity() == 1);
+        Assert.True(_db.CleaningTask.First().EmployeeQuantity() == 1);
     }
     
 }

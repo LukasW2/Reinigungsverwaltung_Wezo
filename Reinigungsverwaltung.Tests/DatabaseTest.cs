@@ -2,9 +2,8 @@
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model.Reinigungsverwaltung.Infrastructure;
-using Xunit;
 
-namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model.Reinigungsverwaltung.Tests;
+namespace Reinigungsverwaltung.Reinigungsverwaltung.Tests;
 
 [Collection("Sequential")]
 public class DatabaseTest : IDisposable
@@ -17,7 +16,7 @@ public class DatabaseTest : IDisposable
         _connection = new SqliteConnection("DataSource=:memory:");
         _connection.Open();
         var opt = new DbContextOptionsBuilder()
-            //.UseSqlite("Data Source=Muell.db") 
+            //.UseSqlite("Data Source=Reinigung.db") 
             .UseSqlite(_connection)  // Keep connection open (only needed with SQLite in memory db)
             .UseLazyLoadingProxies()
             .LogTo(message => Debug.WriteLine(message), Microsoft.Extensions.Logging.LogLevel.Information)
