@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Reinigungsverwaltung.Model;
 
 namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model.Reinigungsverwaltung.Infrastructure;
 
@@ -22,9 +23,7 @@ public class ReinigungsverwaltungContext: DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         
-       //            Name der Klasse                 Name vom Value Object (Zeitstempel)
-       // modelBuilder.Entity<Host>().OwnsOne(h => h.Description);
-       modelBuilder.Entity<DailyCleaningTask>().OwnsOne(d => d.Zeitstempel);
+        modelBuilder.Entity<DailyCleaningTask>().OwnsOne(d => d.Zeitstempel);
        modelBuilder.Entity<WeeklyCleaningTask>().OwnsOne(w => w.Zeitstempel);
        
        modelBuilder.Entity<Hotel>().HasAlternateKey(m => m.Guid);

@@ -1,4 +1,4 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿namespace Reinigungsverwaltung.Model;
 
 public class Products
 {

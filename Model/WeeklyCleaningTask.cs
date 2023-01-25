@@ -1,8 +1,9 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿namespace Reinigungsverwaltung.Model;
 
 public class WeeklyCleaningTask
 {
-    public Zeitstempel Zeitstempel { get; set; }
+    public int Id { get; private set; }
+    public virtual Zeitstempel Zeitstempel { get; set; }
     public string PreferredDay { get; set; }
     public int Week { get; set; }
     public int Year { get; set; }

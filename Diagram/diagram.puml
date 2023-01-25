@@ -7,14 +7,16 @@ class CleaningTask <<aggregate>> {
   +points: int
   +Products: List<Products>
   +CleaningTask: List<CleaningTask>
+  +Employee: List<Employee>
   +Zeitstempel: Zeitstempel
   --
-  +CleaningTask(string description, string status, int points, Products products)
-  +RemoveProduct(Products p) 
-  +ProductQuantity() : int
+  +CleaningTask(string description, string status, int points)
+  +AddProducts((Products products)
+  +RemoveProduct(Products products) 
   +AddEmployee(employee: Employee)
   +RemoveEmployee(employee: Employee)
   +EmployeeQuantity() : int 
+  +ProductQuantity() : int
 }
 
 class DailyCleaningTask extends CleaningTask {
@@ -25,7 +27,7 @@ class DailyCleaningTask extends CleaningTask {
 }
 
 class WeeklyCleaningTask extends CleaningTask {
-  +PreferredDaY: string
+  +PreferredDay: string
   +Week: int
   +Year: int
   --
@@ -39,7 +41,6 @@ class Employee {
   +Lastname: string
   +Position: string
   +ActiveTasks: List<CleaningTask>
-  +Employee: List<Employee>
   --
   +Employee(string firstname, string lastname, string position)
   +getActiveTasks() : List<CleaningTask>
@@ -72,6 +73,8 @@ class Room {
   +Points: int
   +AddCleaningTask(task: CleaningTask)
   +RemoveCleaningTask(CleaningTask task)
+  +AddReservation(Reservation reserv)
+  +removeReservation(Reservation reserv)
 }
 
 class Hotel <<aggregate>> {
@@ -87,8 +90,7 @@ class Hotel <<aggregate>> {
   +RemoveRoom(Room r)
   +RoomQuantity() : int
   +calculateAveragePoints() : int
-  +AddReservation(Room room, DateTime checkInDate, DateTime checkOutDate)
-  +removeReservation(Reservation reservation)
+  
 }
 
 class Guest {
@@ -98,7 +100,7 @@ class Guest {
   +Address: string
   +Reservation: Reservation
   --
-  +Guest(string firstname, string lastname, string address, DateTime birthday, Reservation reservation)
+  +Guest(string firstname, string lastname, string address, DateTime birthday)
 }
 
 class Reservation {
@@ -109,7 +111,7 @@ class Reservation {
   +guest: Guest
   +Reservation: List<Reservation>
   --
-  +Reservation(Room room, DateTime checkInDate, DateTime checkOutDate, Guest guest)
+  +Reservation(Room room, DateTime checkInDate, DateTime checkOutDate)
 }
 
 DailyCleaningTask *--> Zeitstempel
@@ -119,7 +121,7 @@ Employee *--> CleaningTask
 Room --> DailyCleaningTask
 Room --> WeeklyCleaningTask
 Room *--> Hotel
-Reservation *--> Guest
+Reservation <--* Guest
 Reservation --> Room
 Products *--> CleaningTask
 

@@ -1,8 +1,10 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+
+namespace Reinigungsverwaltung.Model;
 
 public class Employee
 {
-    protected List<CleaningTask> _activeTasks = new();
+    public List<CleaningTask> _activeTasks = new();
 
     public Employee(string firstname, string lastname, string position)
     {
@@ -24,10 +26,10 @@ public class Employee
     public string Lastname { get; set; }
     public string Position { get; }
     public DateTime Birthday { get; set; }
-    public virtual List<CleaningTask> ActiveTasks => _activeTasks;
+    
 
-
-    public List<CleaningTask> GetActiveTasks()
+ 
+    public virtual List<CleaningTask> GetActiveTasks()
     {
         return _activeTasks;
     }

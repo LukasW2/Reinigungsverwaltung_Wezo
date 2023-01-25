@@ -1,3 +1,5 @@
-namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+using System.ComponentModel.DataAnnotations;
 
-public record Zeitstempel(DateTime date, string? description, int duration);
+namespace Reinigungsverwaltung.Model;
+
+public record Zeitstempel(DateTime date, int duration, [MaxLength(255)] string description = "");

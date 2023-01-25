@@ -1,4 +1,6 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+
+namespace Reinigungsverwaltung.Model;
 
 public class Guest
 {
@@ -8,21 +10,22 @@ public class Guest
         Lastname = lastname;
         Address = address;
         Birthday = birthday;
+        
     }
 
-    public int GuestId { get; set; }
+    public int Id { get; private set; }
     
     public string Firstname { get; set; }
     public string Lastname { get; set; }
     
     public string Address { get; set; }
-    public virtual Reservation Reservation { get; set; }
+    
     
     public DateTime Birthday { get; set; }
 
 
-    public string? ToString()
+    public string NameandInfos()
     {
-        return base.ToString();
+        return Firstname + " " + Lastname + " " + Address ;
     }
 }

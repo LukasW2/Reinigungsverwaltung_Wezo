@@ -1,4 +1,6 @@
-namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+
+namespace Reinigungsverwaltung.Model;
 
 public class Hotel
 {
@@ -13,15 +15,15 @@ public class Hotel
     public Guid Guid { get; set; }
     public string Name { get; set; }
     public string Address { get; set; }
-    public static List<Room> Rooms { get; set; }
-    public List<Reservation> _reserv = new();
+    public virtual List<Room> Rooms { get; set; }
+    
 
     public void AddRoom(Room r)
     {
         Rooms.Add(r);
     }
 
-    public static void RemoveRoom(Room r)
+    public void RemoveRoom(Room r)
     {
         Rooms.Remove(r);
     }
@@ -31,19 +33,10 @@ public class Hotel
         return Rooms.Count;
     }
     
-    public int calculateAveragePoints()
+    public int CalculateAveragePoints()
     {
         return Rooms.Sum(r => r.Points) / Rooms.Count;
     }
     
-    public void AddReservation(DateTime checkInDate, DateTime checkOutDate)
-    {
-        var newReserv = new Reservation(checkInDate, checkOutDate);
-        _reserv.Add(newReserv);
-    }
-
-    public void RemoveReservation(Reservation reser)
-    {
-        _reserv.Remove(reser);
-    }
+    
 }

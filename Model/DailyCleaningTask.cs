@@ -1,14 +1,21 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Reinigungsverwaltung.Model;
 
-public class DailyCleaningTask
+namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+
+
+public class DailyCleaningTask 
 {
-    public Zeitstempel Zeitstempel { get; set; }
+    public virtual Zeitstempel Zeitstempel { get; set; }
     public int Priority { get; set; }
+    
+    public int Id { get; private set; }
     
     public DailyCleaningTask(int priority)
     {
         Priority = priority;
-        
+
     }
+    
     
 }

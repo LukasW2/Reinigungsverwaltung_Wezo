@@ -1,4 +1,6 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+
+namespace Reinigungsverwaltung.Model;
 
 public class Reservation
 {

@@ -1,10 +1,21 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+
+namespace Reinigungsverwaltung.Model;
+
 
 public class CleaningTask
 {
-    protected static List<Employee> _employees = new();
-    public List<Products> _products = new List<Products>();
-    public Zeitstempel Zeitstempel { get; set; }
+    public List<Employee> _employees = new List<Employee>();
+    protected List<Products> _products = new List<Products>();
+    
+    public virtual IReadOnlyCollection<Products> Products => _products; 
+
+    public int Id { get; set; }  
+    public int taskId { get; set; }
+    public string description { get; set; }
+    public string status { get; set; }
+    public int points { get; set; }
 
     public CleaningTask(string description, string status, int points)
     {
@@ -13,11 +24,12 @@ public class CleaningTask
         this.points = points;
     }
 
-    public int taskId { get; private set; }
-    public string description { get; set; }
-    public string status { get; set; }
-    public int points { get; set; }
 
+    public void AddProducts(Products products)
+    {
+        
+        _products.Add(products);
+    }
     public void RemoveProduct(Products p) 
     {
         _products.Remove(p);
@@ -27,10 +39,11 @@ public class CleaningTask
         return _products.Count;
     }
     
-    public void AddEmployee(string firstname, string lastname, string position)
+    
+    public void AddEmployee(Employee employee)
     {
-        var newEmployee = new Employee(firstname, lastname, position);
-        _employees.Add(newEmployee);
+        
+        _employees.Add(employee);
     }
 
     public void RemoveEmployee(Employee emp)

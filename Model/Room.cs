@@ -1,12 +1,14 @@
-﻿namespace Reinigungsverwaltung.Application.Reinigungsverwaltung.Model;
+﻿namespace Reinigungsverwaltung.Model;
 
 public class Room
 {
+    public int Id { get; private set; }
     private int _points { get; set; }
     public int Beds { get; set; }
-    public List<CleaningTask> cleaningTasks;
+    public List<CleaningTask> _cleaningTasks;
     public bool Issmoking { get; set; }
     public int Roomnumber{ get; set; }
+    public List<Reservation> _reserv;
 
     public Room(int roomnumber, int beds, bool issmoking, int points)
     {
@@ -28,11 +30,30 @@ public class Room
 
     public void AddCleaningTask(CleaningTask task)
     {
-        cleaningTasks.Add(task);
+        _cleaningTasks.Add(task);
     }
     public void RemoveCleaningTask(CleaningTask task)
     {
-        cleaningTasks.Remove(task);
+        _cleaningTasks.Remove(task);
     }
+
+    public int CleaningTaskQuantity()
+    {
+        return _cleaningTasks.Count; 
+    }
+    
+    
+    public void AddReservation(Reservation reserv)
+    {
+        
+        _reserv.Add(reserv);
+    }
+
+    public void RemoveReservation(Reservation reserv)
+    {
+        _reserv.Remove(reserv);
+    }
+    
+    
     
 }
