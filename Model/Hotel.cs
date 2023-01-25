@@ -11,6 +11,13 @@ public class Hotel
         Address = address;
     }
 
+#pragma warning disable CS8618
+    protected Hotel()
+    {
+        
+    }
+#pragma warning restore CS8618
+    
     public int Id { get; private set; }
     public Guid Guid { get; set; }
     public string Name { get; set; }

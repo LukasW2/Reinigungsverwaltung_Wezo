@@ -39,5 +39,9 @@ public class Employee
         return _activeTasks.Count;
     }
     
+    public string NameandInfos()
+    {
+        return Firstname + " " + Lastname + " " + Position;
+    }
     
 }

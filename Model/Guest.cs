@@ -12,6 +12,13 @@ public class Guest
         Birthday = birthday;
         
     }
+    
+#pragma warning disable CS8618
+    protected Guest()
+    {
+        
+    }
+#pragma warning restore CS8618
 
     public int Id { get; private set; }
     

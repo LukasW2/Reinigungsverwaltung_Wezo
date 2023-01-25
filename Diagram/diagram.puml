@@ -22,7 +22,7 @@ class CleaningTask <<aggregate>> {
 class DailyCleaningTask extends CleaningTask {
   +Priority: int
   --
-  +tryHandIn(employee: Employee)
+  +DailyCleaningTask(int priority)
   +reviewHandIn() : bool
 }
 
@@ -31,7 +31,7 @@ class WeeklyCleaningTask extends CleaningTask {
   +Week: int
   +Year: int
   --
-  +tryHandIn(employee: Employee)
+  +WeeklyCleaningTask(string preferredDay, int week, int year)
   +reviewHandIn() : bool
 }
 
@@ -44,7 +44,7 @@ class Employee {
   --
   +Employee(string firstname, string lastname, string position)
   +getActiveTasks() : List<CleaningTask>
-  +CleaningTasksQuantity(): int
+  +NameandInfos(): string 
 }
 
 class Zeitstempel <<value object>>{

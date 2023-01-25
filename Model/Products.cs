@@ -14,5 +14,10 @@ public class Products
         ExpirationDate = expirationDate;
     }
 
-    
+#pragma warning disable CS8618
+    protected Products()
+    {
+        
+    }
+#pragma warning restore CS8618
 }
