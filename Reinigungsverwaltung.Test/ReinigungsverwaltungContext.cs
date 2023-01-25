@@ -34,7 +34,7 @@ public class ReinigungsverwaltungContextTests : DatabaseTest
         _db.Guest.Add(Guest2);
 
 
-        var Hotel1 = new Hotel("Pariser", "Pulkergasse 18");
+        var Hotel1 = new Hotel("Pariser", "Pulkergasse 18" );
         var Hotel2 = new Hotel("Terener", "Poltergasse 2");
         var Hotel3 = new Hotel("Kulka", "Sloncegasse 7");
 
@@ -69,6 +69,15 @@ public class ReinigungsverwaltungContextTests : DatabaseTest
         _db.CleaningTask.Add(Cleaningtask1);
         _db.CleaningTask.Add(Cleaningtask2);
 
+        var WeeklyCleaningTask1 = new WeeklyCleaningTask("Monday", 12, 2023);
+        var WeeklyCleaningTask2 = new WeeklyCleaningTask("Thursday", 26, 2023);
+        _db.WeeklyCleaningTask.Add(WeeklyCleaningTask1);
+        _db.WeeklyCleaningTask.Add(WeeklyCleaningTask2);
+        
+        var DailyCleaningTask1 = new DailyCleaningTask(1);
+        var DailyCleaningTask2 = new DailyCleaningTask(3);
+        _db.DailyCleaningTask.Add(DailyCleaningTask1);
+        _db.DailyCleaningTask.Add(DailyCleaningTask2);
         
         
         _db.SaveChanges();
@@ -82,7 +91,8 @@ public class ReinigungsverwaltungContextTests : DatabaseTest
         Assert.True(_db.Products.ToList().Count > 0);
         Assert.True(_db.Room.ToList().Count > 0);
         Assert.True(_db.CleaningTask.ToList().Count > 0);
-        
+        Assert.True(_db.WeeklyCleaningTask.ToList().Count > 0);
+        Assert.True(_db.DailyCleaningTask.ToList().Count > 0);
     }
     
     

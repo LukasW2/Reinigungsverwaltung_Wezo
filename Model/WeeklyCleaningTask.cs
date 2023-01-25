@@ -7,6 +7,7 @@ public class WeeklyCleaningTask
     public string PreferredDay { get; set; }
     public int Week { get; set; }
     public int Year { get; set; }
+    public bool reviewHandIn { get; set; }
 
     public WeeklyCleaningTask(string preferredDay, int week, int year)
     {

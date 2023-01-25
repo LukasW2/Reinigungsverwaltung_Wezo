@@ -15,27 +15,27 @@ public class Hotel
     public Guid Guid { get; set; }
     public string Name { get; set; }
     public string Address { get; set; }
-    public virtual List<Room> Rooms { get; set; }
+    public virtual List<Room> _rooms { get; set; }
     
 
     public void AddRoom(Room r)
     {
-        Rooms.Add(r);
+        _rooms.Add(r);
     }
 
     public void RemoveRoom(Room r)
     {
-        Rooms.Remove(r);
+        _rooms.Remove(r);
     }
 
     public int RoomQuantity()
     {
-        return Rooms.Count;
+        return _rooms.Count;
     }
     
     public int CalculateAveragePoints()
     {
-        return Rooms.Sum(r => r.Points) / Rooms.Count;
+        return _rooms.Sum(r => r.Points) / _rooms.Count;
     }
     
     

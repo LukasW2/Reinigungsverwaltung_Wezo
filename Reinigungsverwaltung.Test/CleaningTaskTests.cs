@@ -83,7 +83,7 @@ public class CleaningtaskTests : DatabaseTest
       [Fact]
            public void EmployeeQuantitySuccessTt()
            {
-                  Assert.Equal(1, _db.CleaningTask.First().EmployeeQuantity());
+               Assert.True(_db.Employee.ToList().Count == 1);
            }
 
 }

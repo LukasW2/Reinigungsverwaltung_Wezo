@@ -5,7 +5,7 @@ public class Room
     public int Id { get; private set; }
     private int _points { get; set; }
     public int Beds { get; set; }
-    public List<CleaningTask> _cleaningTasks;
+    public virtual List<CleaningTask> _cleaningTasks { get; set; }
     public bool Issmoking { get; set; }
     public int Roomnumber{ get; set; }
     public List<Reservation> _reserv;
@@ -17,7 +17,13 @@ public class Room
         Issmoking = issmoking;
         Points = points;
     }
-
+#pragma warning disable CS8618
+    protected Room()
+    {
+        
+    }
+#pragma warning disable CS8618
+    
     public int Points
     {
         get => _points;

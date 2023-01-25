@@ -23,7 +23,12 @@ public class CleaningTask
         this.status = status;
         this.points = points;
     }
-
+#pragma warning disable CS8618
+    protected CleaningTask()
+    {
+        
+    }
+#pragma warning disable CS8618
 
     public void AddProducts(Products products)
     {
