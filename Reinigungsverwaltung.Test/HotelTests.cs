@@ -25,6 +25,7 @@ public class HotelTests : DatabaseTest
     }
 
     
+    // das noch
     [Fact]
     public void RemoveRoomSuccessTt()
     {
@@ -39,6 +40,18 @@ public class HotelTests : DatabaseTest
         Assert.Equal(0, hotel.RoomQuantity());
     }
     
+    
+    [Fact]
+    public void RoomQuantitySuccessTt()
+    {
+        Assert.True(_db.Hotel.First().RoomQuantity() == 1);
+    }
+    
+    [Fact]
+    public void CalcAvgPointsSuccessTt()
+    {
+        
+    }
     
     
     
